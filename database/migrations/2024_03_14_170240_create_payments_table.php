@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->float('payment_amount');
             $table->string('payment_method');
             $table->enum('payment_status', ['success', 'reject', 'pending']);
-            $table->foreignUuid('bill_id')->nullable();
+            $table->unsignedBigInteger('bill_id')->nullable();
             $table->text('description')->nullable();
             $table->date('record_date');
             $table->boolean('verification')->default(false);
