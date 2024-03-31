@@ -47,7 +47,7 @@
                                         <input type="text"
                                             class="datepicker form-control @error('bill_date') is-invalid @enderror"
                                             id="bill_date" placeholder="dd/mm/yyyy" name="bill_date"
-                                            value="{{ old('bill_date') }}">
+                                            value="{{ old('bill_date') }}" autocomplete="off">
                                         <span class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="mdi mdi-calendar-check"></i>
@@ -66,7 +66,7 @@
                                         <input type="text"
                                             class="datepicker form-control @error('due_date') is-invalid @enderror"
                                             id="due_date" placeholder="dd/mm/yyyy" name="due_date"
-                                            value="{{ old('due_date') }}">
+                                            value="{{ old('due_date') }}" autocomplete="off">
                                         <span class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="mdi mdi-calendar-check"></i>

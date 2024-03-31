@@ -90,7 +90,7 @@
                                         <input type="text"
                                             class="datepicker form-control @error('installation_date') is-invalid @enderror"
                                             id="installation_date" placeholder="dd/mm/yyyy" name="installation_date"
-                                            value="{{ old('installation_date') }}">
+                                            value="{{ old('installation_date') }}" autocomplete="off">
                                         <span class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="mdi mdi-calendar-check"></i>

@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($customer->meters as $i => $item)
+        @foreach ($meters as $i => $item)
             <tr>
                 <td class="text-center">{{ ++$i }}</td>
                 <td>

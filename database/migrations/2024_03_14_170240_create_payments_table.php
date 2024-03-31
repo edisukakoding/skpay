@@ -13,18 +13,19 @@ return new class extends Migration {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
-            $table->date('payment_date');
+            $table->dateTime('payment_date');
             $table->float('payment_amount');
             $table->string('payment_method');
-            $table->enum('payment_status', ['success', 'reject', 'pending']);
             $table->unsignedBigInteger('bill_id')->nullable();
-            $table->text('description')->nullable();
-            $table->date('record_date');
+            $table->text('remarks')->nullable();
+            $table->dateTime('record_date');
             $table->boolean('verification')->default(false);
+            $table->unsignedBigInteger('user_verification_id')->nullable();
             $table->timestamps();
 
             $table->foreign('bill_id')->references('id')->on('bills');
             $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('user_verification_id')->references('id')->on('users');
 
         });
     }

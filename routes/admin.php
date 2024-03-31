@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\isAdmin;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware(isAdmin::class)->group(function () {
     Route::get('/dashboard', function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transactions;
 
+use App\Models\Meter;
 use Midtrans\Snap;
 use App\Models\Bill;
 use App\Models\Rate;
@@ -63,17 +64,7 @@ class BillController extends Controller
                 BillDetail::create($item);
             }
 
-            $item_details = [];
-
-            foreach ($bill->billDetails as $detail) {
-                $item_details[] = [
-                    'id' => $detail->id,
-                    'price' => $detail->subtotal,
-                    'quantity' => 1,
-                    'name' => 'Biaya pemakaian untuk nomor meteran: ' . $detail->meter->meter_number
-                ];
-            }
-
+            $total_amount = BillDetail::whereBillId($bill->id)->sum('subtotal');
             Config::$serverKey = env('MIDTRANS_SERVER_KEY');
             Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
             Config::$isSanitized = true;
@@ -84,7 +75,6 @@ class BillController extends Controller
                     'order_id' => $bill->uuid,
                     'gross_amount' => $bill->total_amount
                 ],
-                'item_details' => $item_details,
                 'customer_details' => [
                     'first_name' => $bill->customer->name,
                     'email' => $bill->customer->email,
@@ -96,6 +86,32 @@ class BillController extends Controller
                         'address' => $bill->customer->address
                     ]
                 ],
+                'item_details' => [
+                    [
+                        "name" => 'Denda',
+                        "price" => $bill->late,
+                        'quantity' => 1,
+                        'id' => rand(),
+                    ],
+                    [
+                        "name" => 'Biaya Lainnya',
+                        "price" => $bill->other_charges,
+                        'quantity' => 1,
+                        'id' => rand(),
+                    ],
+                    [
+                        "name" => 'Diskon',
+                        "price" => -$bill->discount,
+                        'quantity' => 1,
+                        'id' => rand(),
+                    ],
+                    [
+                        "name" => $bill->title,
+                        "price" => $total_amount,
+                        'quantity' => 1,
+                        'id' => rand(),
+                    ],
+                ],
                 'expiry' => [
                     'start_time' => $bill->bill_date->isoFormat('YYYY-MM-DD HH:mm:ss ZZ'),
                     'unit' => 'minutes',
@@ -104,7 +120,6 @@ class BillController extends Controller
             ];
 
             $snapToken = Snap::getSnapToken($params);
-
             $bill->token = $snapToken;
             if ($bill->save()) {
                 DB::commit();
@@ -154,6 +169,7 @@ class BillController extends Controller
 
     public function getMeter(Customer $customer)
     {
-        return view('transactions.bills.meter', compact('customer'));
+        $meters = Meter::whereStatus(true)->whereCustomerId($customer->id)->get();
+        return view('transactions.bills.meter', compact('meters'));
     }
 }
