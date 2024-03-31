@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             [
                 'description' => 'Pemakaian lebih dari > 10 m3',
                 'threshold_limit' => 20,
-                'price' => 2000,
+                'price' => 2500,
                 'rate_id' => $rate->id
             ]
         ];

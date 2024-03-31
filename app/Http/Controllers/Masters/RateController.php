@@ -87,7 +87,7 @@ class RateController extends Controller
     public function update(Request $request, Rate $rate)
     {
         $request->validate([
-            'type' => 'required|unique:rates,type' . $rate->id,
+            'type' => 'required|unique:rates,type,' . $rate->id,
             'effective_date' => 'required|date_format:d/m/Y',
             'fixed_fee' => 'required|numeric',
             'details.*.description' => 'required',
