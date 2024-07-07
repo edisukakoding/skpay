@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('email')->unique();
-            $table->string('block');
+            $table->string('block')->unique();
             $table->text('address');
             $table->boolean('status')->default(true);
             $table->text('remarks')->nullable();

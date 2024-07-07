@@ -41,15 +41,6 @@
                                         <td class="text-center">
                                             <button class="btn btn-xs btn-outline-info btn-detail"
                                                 data-id="{{ $item->id }}">Detail</button>
-                                            <a href="{{ route('bills.edit', ['bill' => $item->id]) }}"
-                                                class="btn btn-xs btn-outline-warning">Edit</a>
-                                            <form action="{{ route('bills.destroy', ['bill' => $item->id]) }}"
-                                                method="POST" style="display: inline"
-                                                onsubmit="return confirm('Are you sure?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger btn-xs">Delete</button>
-                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->dateTime('notification_time');
             $table->string('type');
             $table->boolean('isread')->default(false);
+            $table->text('redirect')->nullable();
             $table->timestamps();
         });
     }

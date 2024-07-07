@@ -1,89 +1,67 @@
-<div class="modal fade" id="modal-detail-rate">
+<div class="modal fade" id="modal-detail-bill">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Detail Rates</h5>
+                <h5 class="modal-title">Rincian Tagihan</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <table>
                     <tr>
-                        <td>Type&nbsp;</td>
-                        <td>:&nbsp;{{ $rate->type }}</td>
+                        <td>Nomor Transaksi&nbsp;</td>
+                        <td>:&nbsp;<strong>{{ $bill->uuid }}</strong></td>
                     </tr>
                     <tr>
-                        <td>Effective Date&nbsp;</td>
-                        <td>:&nbsp;{{ Carbon\Carbon::parse($rate->effective_date)->format('d/m/Y') }}</td>
+                        <td>Pelanggan&nbsp;</td>
+                        <td>:&nbsp;{{ $bill->customer->name }}</td>
                     </tr>
                     <tr>
-                        <td>Expiration Date&nbsp;</td>
-                        <td>:&nbsp;{{ $rate->expiration_date ? Carbon\Carbon::parse($rate->expiration_date)->format('d/m/Y') : '' }}
+                        <td>Tanggal Tagihan&nbsp;</td>
+                        <td>:&nbsp;{{ Carbon\Carbon::parse($bill->bill_date)->format('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jatuh Tempo&nbsp;</td>
+                        <td>:&nbsp;{{ Carbon\Carbon::parse($bill->due_date)->format('d/m/Y') }}
                         </td>
                     </tr>
                     <tr>
-                        <td>Unit Price&nbsp;</td>
-                        <td>:&nbsp;Rp. {{ number_format($rate->unit_price, '2', ',', '.') }}</td>
+                        <td>Denda (IDR)&nbsp;</td>
+                        <td>:&nbsp;Rp. {{ number_format($bill->late, '2', ',', '.') }}</td>
                     </tr>
                     <tr>
-                        <td>Fixed Fee&nbsp;</td>
-                        <td>:&nbsp;Rp. {{ number_format($rate->fixed_fee, '2', ',', '.') }}</td>
+                        <td>Biaya Lainnya (IDR)&nbsp;</td>
+                        <td>:&nbsp;Rp. {{ number_format($bill->other_charges, '2', ',', '.') }}</td>
                     </tr>
                     <tr>
-                        <td>Discounts&nbsp;</td>
-                        <td>:&nbsp;{{ $rate->dicounts }}%</td>
+                        <td>Diskon (IDR)&nbsp;</td>
+                        <td>:&nbsp;Rp. {{ number_format($bill->discount, '2', ',', '.') }}</td>
                     </tr>
                     <tr>
-                        <td>Tax Rate&nbsp;</td>
-                        <td>:&nbsp;{{ $rate->tax_rate }}%</td>
-                    </tr>
-                    <tr>
-                        <td>Exceptions&nbsp;</td>
-                        <td>:&nbsp;{{ $rate->exceptions }}</td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: top">Tier&nbsp;</td>
-                        <td>
-                            @if ($rate->tier_thresholds)
-                                @foreach (json_decode($rate->tier_thresholds) as $i => $item)
-                                    @if ($loop->first)
-                                        :&nbsp;Biaya Meter Antara (0 - {{ $item }}) m<sup>3</sup> :
-                                        Rp. {{ number_format(json_decode($rate->tier_prices)[$i], '2', ',', '.') }}
-                                    @elseif ($loop->last)
-                                        <br />&nbsp; Biaya Meter Lebih
-                                        (> {{ $item }})
-                                        m<sup>3</sup> :
-                                        Rp. {{ number_format(json_decode($rate->tier_prices)[$i], '2', ',', '.') }}
-                                    @else
-                                        <br />&nbsp; Biaya Meter Antara
-                                        ({{ json_decode($rate->tier_thresholds)[$i - 1] }}
-                                        - {{ $item }})
-                                        m<sup>3</sup> :
-                                        Rp. {{ number_format(json_decode($rate->tier_prices)[$i], '2', ',', '.') }}
-                                    @endif
-                                @endforeach
-                            @else
-                                :
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Remakrs&nbsp;</td>
-                        <td>:&nbsp;{{ $rate->remarks }}</td>
+                        <td>Total Biaya (IDR)&nbsp;</td>
+                        <td>:&nbsp;<strong>Rp. {{ number_format($bill->total_amount, '2', ',', '.') }}</strong></td>
                     </tr>
                     <tr>
                         <td>Status&nbsp;</td>
-                        <td>:&nbsp;{!! $rate->status
-                            ? '<span class="badge badge-success"><i class="icon-check"></i> Active</span></td>'
-                            : '<span class="badge badge-danger"><i class="icon-close"></i> Non-Active</span></td>' !!}
+                        <td>:&nbsp;<strong>{{ $bill->status }}</strong></td>
+                    </tr>
+                    @if ($bill->payment_method)
+                        <tr>
+                            <td>Metode Pembayaran&nbsp;</td>
+                            <td>:&nbsp;{{ $bill->payment_method }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dibayar pada&nbsp;</td>
+                            <td>:&nbsp;{{ Carbon\Carbon::parse($bill->payment_date)->format('d/m/Y H:i:s') }}</td>
+                        </tr>
+                    @endif
+                    <tr>
+                        <td>Dibuat pada&nbsp;</td>
+                        <td>:&nbsp;{{ Carbon\Carbon::parse($bill->created_at)->diffForHumans() }}</td>
                     </tr>
                     <tr>
-                        <td>Created At&nbsp;</td>
-                        <td>:&nbsp;{{ Carbon\Carbon::parse($rate->created_at)->diffForHumans() }}</td>
-                    </tr>
-                    <tr>
-                        <td>Updated At&nbsp;</td>
-                        <td>:&nbsp;{{ Carbon\Carbon::parse($rate->updated_at)->diffForHumans() }}</td>
+                        <td>Dibuat Oleh&nbsp;</td>
+                        <td>:&nbsp;{{ $bill->user->name }}</td>
                     </tr>
                 </table>
             </div>

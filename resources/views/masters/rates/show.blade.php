@@ -23,8 +23,9 @@
                     <tr>
                         <td>Status&nbsp;</td>
                         <td>:&nbsp;{!! $rate->status
-                            ? '<span class="badge badge-success"><i class="icon-check"></i> Active</span></td>'
-                            : '<span class="badge badge-danger"><i class="icon-close"></i> Non-Active</span></td>' !!}
+                            ? '<span class="badge badge-success"><i class="icon-check"></i> Active</span>'
+                            : '<span class="badge badge-danger"><i class="icon-close"></i> Non-Active</span>' !!}
+                        </td>
                     </tr>
                     <tr>
                         <td>Dibuat pada&nbsp;</td>

@@ -137,7 +137,7 @@
                             <ul>
                                 @foreach (App\Models\Notification::whereIsread(false)->limit(5)->get() as $item)
                                     <li>
-                                        <a href="javascript:void()">
+                                        <a href="{{ $item->redirect }}?isread=true&id={{ $item->id }}">
                                             <span class="mr-3 avatar-icon bg-success-lighten-2"><i
                                                     class="icon-check"></i></span>
                                             <div class="notification-content">

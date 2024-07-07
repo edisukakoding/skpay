@@ -64,6 +64,7 @@ class MidtransWebhookController extends Controller
                 'message' => Json::encode($payment),
                 'notification_time' => now(),
                 'type' => 'success',
+                'redirect' => route('payments.edit', ['payment' => $payment->id])
             ]);
 
         } else if (in_array($payload['transaction_status'], ['cancel', 'deny', 'expire'])) {

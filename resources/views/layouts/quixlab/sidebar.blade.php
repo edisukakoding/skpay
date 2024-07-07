@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('rates.index') }}" aria-expanded="false">
+                <a href="{{ route('payments.index') }}" aria-expanded="false">
                     <i class="icon-wallet menu-icon"></i><span class="nav-text">Pembayaran</span>
                 </a>
             </li>

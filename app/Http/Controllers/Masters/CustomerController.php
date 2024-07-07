@@ -37,13 +37,14 @@ class CustomerController extends Controller
             'nik' => 'required',
             'customer_type' => 'required|in:Perumahan,Komersil,Industri',
             'name' => 'required|min:3',
-            'block' => 'required',
+            'block' => 'required|unique:customers,block',
             'address' => 'required',
             'phone' => 'required|min:10|unique:customers,phone',
             'email' => 'required|email|unique:customers,email',
         ]);
 
         $data = $request->all();
+        $data['block'] = strtoupper($data['block']);
         $customer = Customer::create($data);
         if ($customer) {
             User::create([
@@ -85,7 +86,7 @@ class CustomerController extends Controller
             'nik' => 'required',
             'customer_type' => 'required|in:Perumahan,Komersil,Industri',
             'name' => 'required|min:3',
-            'block' => 'required',
+            'block' => 'required|unique:customers,block,' . $customer->id,
             'address' => 'required',
             'phone' => 'required|min:10|unique:customers,phone,' . $customer->id,
             'email' => 'required|email|unique:customers,email, ' . $customer->id,
@@ -97,7 +98,9 @@ class CustomerController extends Controller
             $user->save();
         }
 
-        $customer->fill($request->all());
+        $data = $request->all();
+        $data['block'] = strtoupper($data['block']);
+        $customer->fill($data);
         $customer->save();
         return redirect()->route('customers.index')->with(['status' => 'success', 'message' => 'Pelanggan berhasil diubah']);
     }

@@ -6,7 +6,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('bills.store') }}" method="POST">
+                        <form action="{{ route('bills.store') }}" method="POST"
+                            onsubmit="return confirm('Mohon pastikan data sudah benar. \nTagihan yang sudah dikirim ke pelanggan tidak akan bisa diubah')">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -44,10 +45,9 @@
                                 <div class="form-group col-md-6">
                                     <label>Tanggal Tagihan</label>
                                     <div class="d-flex">
-                                        <input type="text"
-                                            class="datepicker form-control @error('bill_date') is-invalid @enderror"
+                                        <input type="text" class="form-control @error('bill_date') is-invalid @enderror"
                                             id="bill_date" placeholder="dd/mm/yyyy" name="bill_date"
-                                            value="{{ old('bill_date') }}" autocomplete="off">
+                                            value="{{ old('bill_date', date('d/m/Y')) }}" autocomplete="off" readonly>
                                         <span class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="mdi mdi-calendar-check"></i>

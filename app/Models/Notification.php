@@ -14,6 +14,7 @@ class Notification extends Model
         'message',
         'notification_time',
         'type',
-        'isread'
+        'isread',
+        'redirect'
     ];
 }
