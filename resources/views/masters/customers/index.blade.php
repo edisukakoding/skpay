@@ -6,9 +6,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12 d-flex justify-content-between" style="margin-bottom: -20px">
+                        <div class="col-md-12" style="margin-bottom: -20px">
                             <a href="{{ route('customers.create') }}" class="btn btn-primary"
                                 style="margin-left: 30px">Pengguna Baru</a>
+                            <a href="{{ route('customers.synchronize') }}" class="btn btn-warning"
+                                style="margin-left: 5px">Synchronize</a>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -19,7 +21,7 @@
                                     <th class="text-center">Nama</th>
                                     <th class="text-center">Email</th>
                                     <th class="text-center">No. HP</th>
-                                    <th class="text-center">Tanggal Pembayaran Terakhir</th>
+                                    <th class="text-center">Pembayaran Terakhir</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>

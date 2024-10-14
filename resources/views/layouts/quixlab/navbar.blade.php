@@ -3,7 +3,7 @@
 ***********************************-->
 <div class="nav-header">
     <div class="brand-logo">
-        <a href="index.html">
+        <a href="{{ route('dashboard') }}">
             <b class="logo-abbr">
                 {{-- <img src="{{ asset('library/theme/images/logo.png') }}" alt="">  --}}
                 <i class="icon-energy icons text-white"></i>
@@ -175,7 +175,7 @@
                     <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                         <div class="dropdown-content-body">
                             <ul>
-                                <li>
+                                {{-- <li>
                                     <a href="app-profile.html"><i class="icon-user"></i>
                                         <span>Profile</span></a>
                                 </li>
@@ -190,7 +190,7 @@
                                 <li>
                                     <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock
                                             Screen</span></a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                         @csrf

@@ -57,16 +57,16 @@ class DatabaseSeeder extends Seeder
             'customer_type' => 'Perumahan',
             'nik' => '3321011309980001',
             'phone' => '089664684169',
-            'email' => 'edi@gmail.com',
             'block' => 'C3-16',
-            'address' => 'Karangsono RT 12 RW 01'
+            'group' => 'PDA 7',
+            'rt' => 'RT 01'
         ]);
 
         User::create([
-            'email' => $customer->email,
             'name' => $customer->name,
             'role' => 'user',
-            'password' => Hash::make('pda12345')
+            'block' => $customer->block,
+            'password' => Hash::make(substr($customer->phone, -4))
         ]);
 
         Meter::create([

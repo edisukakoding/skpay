@@ -6,9 +6,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12 d-flex justify-content-between" style="margin-bottom: -20px">
+                        <div class="col-md-12" style="margin-bottom: -20px">
                             <a href="{{ route('meters.create') }}" class="btn btn-primary" style="margin-left: 30px">Tambah
                                 Meteran</a>
+                            <a href="{{ route('meters.generate') }}" class="btn btn-danger"
+                                style="margin-left: 5px">Generate</a>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -20,7 +22,6 @@
                                     <th class="text-center">Pelanggan</th>
                                     <th class="text-center">No Seri</th>
                                     <th class="text-center">Tanggal Pemasangan</th>
-                                    <th class="text-center">Lokasi</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -33,7 +34,6 @@
                                         <td class="text-center">{{ $item->meter_number }}</td>
                                         <td class="text-center">
                                             {{ \Carbon\Carbon::parse($item->installation_date)->format('d/m/Y') }}</td>
-                                        <td class="text-left">{{ $item->location }}</td>
                                         <td class="text-center">
                                             <form action="{{ route('meters.set-status', ['meter' => $item->id]) }}"
                                                 method="POST" style="display: inline">

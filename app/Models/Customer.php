@@ -18,7 +18,9 @@ class Customer extends Model
         'block',
         'status',
         'remarks',
-        'customer_type'
+        'customer_type',
+        'group',
+        'rt'
     ];
 
     public function rate()
@@ -34,5 +36,10 @@ class Customer extends Model
     public function bills()
     {
         return $this->hasMany(Bill::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'block', 'block');
     }
 }

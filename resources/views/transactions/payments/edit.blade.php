@@ -42,7 +42,8 @@
                         </tr>
                         <tr>
                             <td>Status&nbsp;</td>
-                            <td>:&nbsp;<strong>{{ $payment->bill->status }}</strong></td>
+                            <td>:&nbsp;<span class="badge badge-success">{{ $payment->bill->status }}</span>
+                            </td>
                         </tr>
                         @if ($payment->bill->payment_method)
                             <tr>
@@ -65,12 +66,17 @@
                         </tr>
                     </table>
                     <br>
-                    <form action="{{ route('payments.update', ['payment' => $payment->id]) }}" method="POST"
-                        onsubmit="return confirm('Verifikasi Pembayaran?')">
-                        @csrf
-                        @method('PUT')
-                        <button class="btn btn-block btn-outline-success">Verifikasi</button>
-                    </form>
+                    @if ($payment->verification)
+                        <button class="btn btn-block btn-success"><i class="icon-check"></i>
+                            Terverifikasi</button>
+                    @else
+                        <form action="{{ route('payments.update', ['payment' => $payment->id]) }}" method="POST"
+                            onsubmit="return confirm('Verifikasi Pembayaran?')">
+                            @csrf
+                            @method('PUT')
+                            <button class="btn btn-block btn-outline-warning">Verifikasi</button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

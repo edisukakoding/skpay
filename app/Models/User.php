@@ -20,7 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'block'
     ];
 
     /**
@@ -48,6 +49,6 @@ class User extends Authenticatable
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'email', 'email');
+        return $this->belongsTo(Customer::class, 'block', 'block');
     }
 }

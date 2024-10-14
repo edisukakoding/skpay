@@ -58,12 +58,16 @@
                                     <td style="text-align: right">{{ $item->meter->meter_number }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Pemakaian Sebelumnya</td>
+                                    <td>Angka Meter Sebelumnya</td>
                                     <td style="text-align: right">{{ $item->previous_reading }} m<sup>3</sup></td>
                                 </tr>
                                 <tr>
-                                    <td>Pemakaian Saat Ini</td>
+                                    <td>Angka Meter Saat ini</td>
                                     <td style="text-align: right">{{ $item->current_reading }} m<sup>3</sup></td>
+                                </tr>
+                                <tr>
+                                    <td>Pemakaian</td>
+                                    <td style="text-align: right">{{ $item->consumption }} m<sup>3</sup></td>
                                 </tr>
                                 <tr>
                                     <td>Biaya Pemakaian</td>

@@ -23,6 +23,12 @@ class Bill extends Model
         'uuid',
         'status'
     ];
+
+    protected $casts = [
+        'bill_date' => 'datetime',
+        'due_date' => 'datetime',
+    ];
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

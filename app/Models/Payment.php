@@ -21,6 +21,10 @@ class Payment extends Model
         'user_verification_id'
     ];
 
+    protected $casts = [
+        'payment_date' => 'datetime'
+    ];
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

@@ -127,4 +127,25 @@ class CustomerController extends Controller
 
         return abort(500);
     }
+
+    public function synchronize()
+    {
+        $customers = Customer::all();
+        foreach ($customers as $customer) {
+            if ($customer->user === null) {
+                User::create([
+                    'role' => 'user',
+                    'name' => $customer->name,
+                    'email' => $customer->email,
+                    'block' => $customer->block,
+                    'password' => Hash::make(substr($customer->phone, -4))
+                ]);
+            }
+        }
+
+        if (User::whereRole('user')->count() === Customer::count()) {
+            return back()->with(['status' => 'success', 'message' => 'Pelanggan telah di singkronisasi dengan pengguna']);
+        }
+        return back()->with(['status' => 'error', 'message' => 'Singkronisasi tidak lengkap']);
+    }
 }

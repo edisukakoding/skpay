@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('block')->unique();
             $table->text('address');
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(value: true);
             $table->text('remarks')->nullable();
             $table->date('last_payment_date')->nullable();
             $table->float('total_pending_bills')->default(0);

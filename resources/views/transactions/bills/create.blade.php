@@ -66,7 +66,7 @@
                                         <input type="text"
                                             class="datepicker form-control @error('due_date') is-invalid @enderror"
                                             id="due_date" placeholder="dd/mm/yyyy" name="due_date"
-                                            value="{{ old('due_date') }}" autocomplete="off">
+                                            value="{{ old('due_date', date('29/m/Y')) }}" autocomplete="off">
                                         <span class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="mdi mdi-calendar-check"></i>

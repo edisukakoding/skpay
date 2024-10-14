@@ -14,10 +14,10 @@
                                 <form class="mt-5 mb-5 login-input" action="{{ route('login') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" name="email"
-                                            class="form-control @error('email') is-invalid @enderror"
-                                            placeholder="Email atau Block-Nomor Rumah. Cth: A1-01 (Gunakan tanda strip tanpa spasi)">
-                                        @error('email')
+                                        <input type="text" name="login"
+                                            class="form-control @error('login') is-invalid @enderror"
+                                            placeholder="Block-Nomor Rumah. Cth: A1-01 (Gunakan tanda strip tanpa spasi)">
+                                        @error('login')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

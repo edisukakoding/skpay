@@ -119,4 +119,28 @@ class MeterController extends Controller
 
         return abort(500);
     }
+
+    public function generate()
+    {
+        $customers = Customer::all();
+        foreach ($customers as $customer) {
+            if ($customer->meters()->count() === 0) {
+                Meter::create([
+                    'customer_id' => $customer->id,
+                    'rate_id' => 1,
+                    'meter_type' => 'Analog',
+                    'meter_number' => time(),
+                    'installation_date' => now(),
+                    'brand' => '-',
+                    'location' => '-',
+                    'previous_reading' => 0,
+                    'current_reading' => 0,
+                    'status' => true,
+                    'remarks' => 'Generate by sistem'
+                ]);
+            }
+        }
+
+        return back()->with(['status' => 'success', 'message' => 'Meteran berhasil di generate']);
+    }
 }

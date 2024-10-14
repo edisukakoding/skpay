@@ -41,8 +41,8 @@ class MidtransWebhookController extends Controller
             $bill->save();
             foreach ($bill->billDetails as $item) {
                 $meter = Meter::whereId($item->meter_id)->first();
-                $meter->previous_reading = $item->current_reading;
-                $meter->current_reading;
+                $meter->previous_reading = $meter->current_reading;
+                $meter->current_reading = $item->current_reading;
                 $meter->save();
             }
 
